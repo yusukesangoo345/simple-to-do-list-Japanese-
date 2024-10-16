@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>シンプルなTo-Doリスト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 50px;
+            text-align: center;
+        }
+        #taskInput {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+        }
+        #addTaskBtn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #addTaskBtn:hover {
+            background-color: #45a049;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background-color: white;
+            padding: 10px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .removeBtn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .removeBtn:hover {
+            background-color: #e60000;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>To-Doリスト</h1>
+    <input type="text" id="taskInput" placeholder="タスクを入力...">
+    <button id="addTaskBtn">追加</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        document.getElementById("addTaskBtn").addEventListener("click", addTask);
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const task = taskInput.value.trim();
+
+            if (task === "") {
+                alert("タスクを入力してください");
+                return;
+            }
+
+            const li = document.createElement("li");
+            li.textContent = task;
+
+            const removeBtn = document.createElement("button");
+            removeBtn.textContent = "削除";
+            removeBtn.classList.add("removeBtn");
+            removeBtn.onclick = function() {
+                this.parentElement.remove();
+            };
+
+            li.appendChild(removeBtn);
+            document.getElementById("taskList").appendChild(li);
+            taskInput.value = "";
+        }
+    </script>
+
+</body>
+</html>
